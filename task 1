@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Checker</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .result { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Password Strength Assessment Tool</h1>
+    <input type="password" id="password" placeholder="Enter your password" />
+    <button onclick="assessPassword()">Check Strength</button>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        function assessPassword() {
+            const password = document.getElementById('password').value;
+            const resultDiv = document.getElementById('result');
+            let lengthScore = 0;
+            let complexityScore = 0;
+            let uniquenessScore = 0;
+            if (password.length >= 12) {
+                lengthScore += 2;
+            } else if (password.length >= 8) {
+                lengthScore += 1;
+            }
+            if (/[A-Z]/.test(password)) complexityScore++;
+            if (/[a-z]/.test(password)) complexityScore++;
+            if (/[0-9]/.test(password)) complexityScore++;
+            if (/[@$!%*?&]/.test(password)) complexityScore++;
+
+           const commonPasswords = new Set(["password", "123456", "123456789", "qwerty", "abc123", "letmein", "welcome"]);
+            if (!commonPasswords.has(password)) uniquenessScore++;
+            const totalScore = lengthScore + complexityScore + uniquenessScore;
+
+            let strength;
+            if (totalScore <= 2) {
+                strength = "Weak";
+            } else if (totalScore <= 4) {
+                strength = "Moderate";
+            } else {
+                strength = "Strong";
+            }
+            resultDiv.innerHTML = `
+                <h3>Password Strength Assessment Result:</h3>
+                <p>Length Score: ${lengthScore}</p>
+                <p>Complexity Score: ${complexityScore}</p>
+                <p>Uniqueness Score: ${uniquenessScore}</p>
+                <p>Total Score: ${totalScore}</p>
+                <p>Strength: ${strength}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
