@@ -31,3 +31,6 @@ JavaScript Logic:
 Event Listeners: To capture input events on the password field.
 Validation Functions: Functions that check each strength criterion and calculate the overall strength score.
 Display Functions: Functions to update the UI with strength feedback and suggestions.
+![image](https://github.com/user-attachments/assets/2ef9431d-1bc7-4014-8ac1-26cca3f7be32)
+
+
